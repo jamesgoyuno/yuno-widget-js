@@ -1,3 +1,5 @@
+console.log("James' Widget");
+
 let openedWidget = false;
 function openIframe() {
   var x = document.getElementById("yunoBg");
