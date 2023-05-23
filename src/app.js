@@ -1,5 +1,9 @@
-function openYunoIframe(e) {
+function openYunoIframe() {
   var x = document.getElementById("yunoBg");
+  x.style.display === "none"
+    ? (x.style.display = "flex")
+    : (x.style.display = "none");
+  var x = document.getElementById("yunoWidgetAlt");
   x.style.display === "none"
     ? (x.style.display = "flex")
     : (x.style.display = "none");
@@ -41,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         display: flex;
         border-radius: 3rem;
         justify-content: center;
+        flex-direction: column;
         align-items: center;
         transition: all 100ms ease-in-out 0s;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
@@ -51,7 +56,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         height: 65px;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.9);
       }
-      #yunoWidget > svg {
+      #yunoBubbleTipContainer {
+        display: flex;
+        justify-content: center;
+      }
+      #yunoBubbleTipContainer > svg {
         width: 15px;
         height: 8px;
         position: absolute;
@@ -121,21 +130,28 @@ document.addEventListener("DOMContentLoaded", function (event) {
           width: 32px;
           right: -12px;
       }
+      #yunoWidgetAlt {
+        width: 64px;
+        height: 64px;
+        position: absolute;
+      }
     </style>
 
-    <div id="yunoBg" style="display: none" onClick="openYunoIframe(e)">
+    <div id="yunoBg" style="display: none" onClick="openYunoIframe()">
       <div id="yunoContainer">
         <p id="yunoCross">&#10006;</p>
         <iframe id="yunoIframe" src="https://hmo.goyuno.com"></iframe>
       </div>
     </div>
-    <div id="yunoWidget" onclick="openYunoIframe(e)">
-      <svg id="yunoBubbleTip" width="28" height="6">
-        <path
-        fill="#fff"
-        d="M14.071.485c.891 0 1.337 1.077.707 1.707l-6.07 6.071a1 1 0 0 1-1.415 0l-6.071-6.07c-.63-.63-.184-1.708.707-1.708H14.07Z"
-        />
-      </svg>
+    <div id="yunoWidget" onclick="openYunoIframe()">
+      <div id="yunoBubbleTipContainer">
+        <svg id="yunoBubbleTip" width="28" height="6">
+          <path
+          fill="#fff"
+          d="M14.071.485c.891 0 1.337 1.077.707 1.707l-6.07 6.071a1 1 0 0 1-1.415 0l-6.071-6.07c-.63-.63-.184-1.708.707-1.708H14.07Z"
+          />
+        </svg>
+      </div>
       <div id="yunoMessageBubble">
         <div onClick="yunoClose(event)">    
             <svg id="yunoCloseMessage" onClick="yunoClose(event)" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
@@ -170,6 +186,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
         height="50px"
         width="50px"
       />
+      <svg id="yunoWidgetAlt" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
+        <g filter="url(#a)">
+            <rect width="60" height="60" x="2" y="1" fill="#4EAEA5" rx="30"/>
+            <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m39.5 23.5-15 15m0-15 15 15"/>
+            <rect width="59" height="59" x="2.5" y="1.5" stroke="#4EAEA5" rx="29.5"/>
+        </g>
+        <defs>
+            <filter id="a" width="64" height="64" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="1"/>
+            <feGaussianBlur stdDeviation="1"/>
+            <feColorMatrix values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.05 0"/>
+            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_10816_61643"/>
+            <feBlend in="SourceGraphic" in2="effect1_dropShadow_10816_61643" result="shape"/>
+            </filter>
+        </defs>
+    </svg>
     </div>
 `;
   const htmlWidget = document.getElementById("yuno-widget");
