@@ -213,4 +213,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
     widgetAttributes.getNamedItem("title").value;
   document.getElementById("yunoBubbleText").innerText =
     widgetAttributes.getNamedItem("text").value;
+  document.getElementById("yunoIframe").setAttribute("src", widgetAttributes.getNamedItem("url").value)
 });
