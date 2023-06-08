@@ -7,6 +7,10 @@ function openYunoIframe() {
   x.style.display === "none"
     ? (x.style.display = "flex")
     : (x.style.display = "none");
+  var x = document.getElementById("yunoWidgetImg");
+  x.style.display === "none"
+    ? (x.style.display = "flex")
+    : (x.style.display = "none");
   document.getElementById("yunoMessageBubble").style.display = "none";
   document.getElementById("yunoBubbleTip").style.display = "none";
 }
@@ -41,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         transform: translateX(50%);
         height: 60px;
         width: 60px;
-        background-color: #4eaea5;
+        background-color: var(--yunoWidgetPrimaryColor);
         display: flex;
         border-radius: 3rem;
         justify-content: center;
@@ -79,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         padding: 2rem 3px 8px 3px;
         border-radius: 2px;
-        background-color: #4eaea5;
+        background-color: var(--yunoWidgetPrimaryColor);
       }
       #yunoCross {
         position: fixed;
@@ -126,9 +130,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
       #yunoCloseMessage {
           position: absolute;
           z-index: 10000000 !important;
-          top: -28px;
+          top: -16px;
           width: 32px;
+          height: 32px;
           right: -12px;
+          background-color: var(--yunoWidgetPrimaryColor);
+          border-radius: 32px;
       }
       #yunoWidgetAlt {
         width: 64px;
@@ -146,31 +153,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
     <div id="yunoWidget" onclick="openYunoIframe()">
       <div id="yunoBubbleTipContainer">
         <svg id="yunoBubbleTip" width="28" height="6">
-          <path
-          fill="#fff"
-          d="M14.071.485c.891 0 1.337 1.077.707 1.707l-6.07 6.071a1 1 0 0 1-1.415 0l-6.071-6.07c-.63-.63-.184-1.708.707-1.708H14.07Z"
-          />
+          <g filter="url(#a)">
+            <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m37.5 22.5-15 15m0-15 15 15"/>
+          </g>
+          <defs>
+            <filter id="a" width="60" height="60" x="-2" y="-1" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+              <feOffset dy="1"/>
+              <feGaussianBlur stdDeviation="1"/>
+              <feColorMatrix values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.05 0"/>
+              <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_11100_61637"/>
+              <feBlend in="SourceGraphic" in2="effect1_dropShadow_11100_61637" result="shape"/>
+            </filter>
+          </defs>
         </svg>
       </div>
       <div id="yunoMessageBubble">
         <div onClick="yunoClose(event)">    
-            <svg id="yunoCloseMessage" onClick="yunoClose(event)" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
-                <g filter="url(#a)">
-                    <rect width="60" height="60" x="2" y="1" fill="#4EAEA5" rx="30"/>
-                    <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m39.5 23.5-15 15m0-15 15 15"/>
-                    <rect width="59" height="59" x="2.5" y="1.5" stroke="#4EAEA5" rx="29.5"/>
-                </g>
-                <defs>
-                    <filter id="a" width="64" height="64" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-                    <feOffset dy="1"/>
-                    <feGaussianBlur stdDeviation="1"/>
-                    <feColorMatrix values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.05 0"/>
-                    <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_10816_61643"/>
-                    <feBlend in="SourceGraphic" in2="effect1_dropShadow_10816_61643" result="shape"/>
-                    </filter>
-                </defs>
+            <svg id="yunoCloseMessage" onClick="yunoClose(event)" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="none" viewBox="0 0 64 64">
+              <g filter="url(#a)">
+                <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m37.5 22.5-15 15m0-15 15 15"/>
+              </g>
+              <defs>
+                <filter id="a" width="60" height="60" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                  <feOffset dy="1"/>
+                  <feGaussianBlur stdDeviation="1"/>
+                  <feColorMatrix values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.05 0"/>
+                  <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_11100_61637"/>
+                  <feBlend in="SourceGraphic" in2="effect1_dropShadow_11100_61637" result="shape"/>
+                </filter>
+              </defs>
             </svg>
         </div>
         <div id="bubbleTitleContainer">
@@ -182,30 +197,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
         <p id="yunoBubbleText"></p>
       </div>
       <img
+        id="yunoWidgetImg"
         src="https://yuno-assets.s3.eu-west-2.amazonaws.com/YunoWidget.gif"
         height="50px"
         width="50px"
       />
       <svg id="yunoWidgetAlt" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
         <g filter="url(#a)">
-            <rect width="60" height="60" x="2" y="1" fill="#4EAEA5" rx="30"/>
-            <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m39.5 23.5-15 15m0-15 15 15"/>
-            <rect width="59" height="59" x="2.5" y="1.5" stroke="#4EAEA5" rx="29.5"/>
+          <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m37.5 22.5-15 15m0-15 15 15"/>
         </g>
         <defs>
-            <filter id="a" width="64" height="64" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+          <filter id="a" width="64" height="64" x="-2" y="-1" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
             <feFlood flood-opacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
             <feOffset dy="1"/>
             <feGaussianBlur stdDeviation="1"/>
             <feColorMatrix values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.05 0"/>
-            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_10816_61643"/>
-            <feBlend in="SourceGraphic" in2="effect1_dropShadow_10816_61643" result="shape"/>
-            </filter>
+            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_11100_61637"/>
+            <feBlend in="SourceGraphic" in2="effect1_dropShadow_11100_61637" result="shape"/>
+          </filter>
         </defs>
     </svg>
     </div>
 `;
+
   const htmlWidget = document.getElementById("yuno-widget");
   htmlWidget.innerHTML = widgetHTML;
   const widgetAttributes = htmlWidget.attributes;
@@ -213,5 +228,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
     widgetAttributes.getNamedItem("title").value;
   document.getElementById("yunoBubbleText").innerText =
     widgetAttributes.getNamedItem("text").value;
-  document.getElementById("yunoIframe").setAttribute("src", widgetAttributes.getNamedItem("url").value)
+
+  const widgetUrl = widgetAttributes.getNamedItem("url").value;
+
+  document.getElementById("yunoIframe").setAttribute("src", widgetUrl);
+
+  const getColours = async (url) => {
+    const response = await fetch(
+      `http://localhost:8080/customers/${encodeURIComponent(url)}`,
+      {
+        headers: {
+          Origin: url,
+        },
+      }
+    );
+    const {
+      data: { primaryColour, secondaryColour },
+    } = await response.json();
+
+    let r = document.querySelector(":root");
+    r.style.setProperty("--yunoWidgetPrimaryColor", primaryColour);
+  };
+
+  getColours(widgetUrl);
 });
