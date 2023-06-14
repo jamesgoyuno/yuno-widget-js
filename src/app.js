@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   const getColours = async (url) => {
     const response = await fetch(
-      `http://localhost:8080/customers/${encodeURIComponent(url)}`,
+      `https://api.uat.goyuno.com/customers/${encodeURIComponent(url)}`,
       {
         headers: {
           Origin: url,
