@@ -1,3 +1,5 @@
+const stillImage_customerIds = [34];
+
 function openYunoIframe() {
   var x = document.getElementById("yunoBg");
   x.style.display === "none"
@@ -17,6 +19,9 @@ function openYunoIframe() {
 
 const widgetHTML = `
   <style>
+    :root {
+      --yunoWidgetPrimaryColor: #4EAEA5;
+    }
     #yunoBg {
       z-index: 999999 !important;
       width: 100vw;
@@ -140,7 +145,7 @@ const widgetHTML = `
   <div id="yunoBg" style="display: none" onClick="openYunoIframe()">
     <div id="yunoContainer">
       <p id="yunoCross">&#10006;</p>
-      <iframe id="yunoIframe" src="https://hmo.goyuno.com"></iframe>
+      <iframe id="yunoIframe" src="https://app.goyuno.com"></iframe>
     </div>
   </div>
   <div id="yunoWidget" onclick="openYunoIframe()">
@@ -223,6 +228,8 @@ const executeCode = () => {
   document.getElementById("yunoBubbleText").innerText =
     widgetAttributes.getNamedItem("text").value;
 
+  const widgetImg = document.getElementById("yunoWidgetImg");
+
   const widgetUrl = widgetAttributes.getNamedItem("url").value;
 
   document.getElementById("yunoIframe").setAttribute("src", widgetUrl);
@@ -237,11 +244,20 @@ const executeCode = () => {
       }
     );
     const {
-      data: { primaryColour, secondaryColour },
+      data: { primaryColour, secondaryColour, customerId },
     } = await response.json();
 
+    if (stillImage_customerIds.includes(customerId)) {
+      widgetImg.setAttribute(
+        "src",
+        "https://yuno-assets.s3.eu-west-2.amazonaws.com/YunoWidgetStill.gif"
+      );
+    }
+
     let r = document.querySelector(":root");
-    r.style.setProperty("--yunoWidgetPrimaryColor", primaryColour);
+    if (primaryColour) {
+      r.style.setProperty("--yunoWidgetPrimaryColor", primaryColour);
+    }
   };
 
   getColours(widgetUrl);
